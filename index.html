@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Student Grade Management System</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+    <nav>
+        <a href="#welcome">Home</a>
+        <a href="#login">Login</a>
+    </nav>
+</header>
+
+<section id="welcome">
+    <h1>Welcome to Student Grade Management System</h1>
+    <button id="navLogin">Read More</button>
+</section>
+
+<section id="login">
+    <h2>Login</h2>
+    <form>
+        <label for="username">Username:</label>
+        <input id="username" name="username" type="text">
+
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password">
+
+        <p><a href="forgot-password">Forgot your password?</a></p>
+
+        <button type="submit">Login</button>
+    </form>
+</section>
+<script>
+    document.getElementById("navLogin").addEventListener("click", () => {
+        window.location.href = "#login";
+    })
+
+    document.getElementById("login").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        if (username === "admin" && password === "password") {
+            console.log("User is correct");
+            window.location.href = "tables.html";
+        } else {
+            alert("Username or password is wrong");
+        }
+    });
+</script>
+</body>
+
+</html>
+

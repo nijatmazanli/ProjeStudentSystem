@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="tableStyle.css" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>Project's Name</h1>
+    <a href="#">Home</a>
+</header>
+
+
+<section>
+    <form id="addForm">
+        <label for="name">Name:</label>
+        <input id="name" name="name" type="text">
+
+        <label for="surname">Surname:</label>
+        <input id="surname" name="surname" type="text">
+
+        <label for="subject1">Subject 1:</label>
+        <input id="subject1" max="100" min="1" name="subject1" type="number">
+
+        <label for="subject2">Subject 2:</label>
+        <input id="subject2" max="100" min="1" name="subject2" type="number">
+
+        <label for="subject3">Subject 3:</label>
+        <input id="subject3" max="100" min="1" name="subject3" type="number">
+
+        <button type="submit">Submit</button>
+    </form>
+</section>
+
+
+<section>
+    <h2 style="text-align: center">Top Performing Students</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name + Surname</th>
+            <th>Average</th>
+        </tr>
+        </thead>
+        <tbody id="tBodyTopStudents">
+
+
+        </tbody>
+    </table>
+</section>
+
+
+<section>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Subject 1</th>
+            <th>Subject 2</th>
+            <th>Subject 3</th>
+            <th>Average</th>
+            <th>Pass/Fail</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody id="tBodyStudents">
+
+        </tbody>
+    </table>
+</section>
+<script>
+    let studentsArr = [
+        [1, "John", "Smith", 85, 90, 88, 87.67],
+        [2, "Jane", "Doe", 92, 88, 91, 90.33],
+        [3, "Alex", "Johnson", 78, 84, 80, 80.67],
+        [4, "Emily", "Davis", 88, 85, 87, 86.67],
+        [5, "Chris", "Brown", 81, 83, 79, 81.00],
+        [6, "Sara", "Wilson", 90, 89, 91, 90.00],
+        [7, "Michael", "Taylor", 77, 79, 75, 77.00],
+        [8, "Jessica", "Martinez", 89, 88, 90, 89.00],
+        [9, "David", "Anderson", 84, 82, 85, 83.67],
+        [10, "Laura", "Thomas", 91, 92, 90, 91.00],
+        [11, "Robert", "Jackson", 76, 78, 75, 76.33],
+        [12, "Olivia", "White", 87, 85, 88, 86.67],
+        [13, "Daniel", "Harris", 80, 83, 81, 81.33],
+        [14, "Sophia", "Clark", 93, 91, 94, 92.67],
+        [15, "Matthew", "Lewis", 79, 81, 80, 80.00],
+        [16, "Ava", "Lee", 86, 88, 85, 86.33],
+        [17, "James", "Walker", 83, 84, 82, 83.00],
+        [18, "Isabella", "Hall", 82, 81, 84, 82.33],
+        [19, "Ethan", "Allen", 75, 77, 76, 76.00],
+        [20, "Charlotte", "Young", 88, 86, 89, 87.67],
+        [21, "Alexander", "King", 89, 91, 88, 89.33],
+        [22, "Mia", "Wright", 90, 89, 92, 90.33],
+        [23, "Lucas", "Scott", 84, 86, 83, 84.33],
+        [24, "Amelia", "Green", 87, 89, 85, 87.00],
+        [25, "Henry", "Adams", 85, 84, 86, 85.00],
+        [26, "Harper", "Baker", 92, 90, 93, 91.67],
+        [27, "Sebastian", "Gonzalez", 91, 89, 92, 90.67],
+        [28, "Evelyn", "Nelson", 86, 85, 87, 86.00],
+        [29, "Jack", "Carter", 83, 81, 84, 82.67],
+        [30, "Liam", "Mitchell", 94, 92, 95, 93.67]
+    ];
+    var sortedStudents = [
+        [1, "John", "Smith", 85, 90, 88, 87.67],
+        [2, "Jane", "Doe", 92, 88, 91, 90.33],
+        [3, "Alex", "Johnson", 78, 84, 80, 80.67],
+        [4, "Emily", "Davis", 88, 85, 87, 86.67],
+        [5, "Chris", "Brown", 81, 83, 79, 81.00],
+        [6, "Sara", "Wilson", 90, 89, 91, 90.00],
+        [7, "Michael", "Taylor", 77, 79, 75, 77.00],
+        [8, "Jessica", "Martinez", 89, 88, 90, 89.00],
+        [9, "David", "Anderson", 84, 82, 85, 83.67],
+        [10, "Laura", "Thomas", 91, 92, 90, 91.00],
+        [11, "Robert", "Jackson", 76, 78, 75, 76.33],
+        [12, "Olivia", "White", 87, 85, 88, 86.67],
+        [13, "Daniel", "Harris", 80, 83, 81, 81.33],
+        [14, "Sophia", "Clark", 93, 91, 94, 92.67],
+        [15, "Matthew", "Lewis", 79, 81, 80, 80.00],
+        [16, "Ava", "Lee", 86, 88, 85, 86.33],
+        [17, "James", "Walker", 83, 84, 82, 83.00],
+        [18, "Isabella", "Hall", 82, 81, 84, 82.33],
+        [19, "Ethan", "Allen", 75, 77, 76, 76.00],
+        [20, "Charlotte", "Young", 88, 86, 89, 87.67],
+        [21, "Alexander", "King", 89, 91, 88, 89.33],
+        [22, "Mia", "Wright", 90, 89, 92, 90.33],
+        [23, "Lucas", "Scott", 84, 86, 83, 84.33],
+        [24, "Amelia", "Green", 87, 89, 85, 87.00],
+        [25, "Henry", "Adams", 85, 84, 86, 85.00],
+        [26, "Harper", "Baker", 92, 90, 93, 91.67],
+        [27, "Sebastian", "Gonzalez", 91, 89, 92, 90.67],
+        [28, "Evelyn", "Nelson", 86, 85, 87, 86.00],
+        [29, "Jack", "Carter", 83, 81, 84, 82.67],
+        [30, "Liam", "Mitchell", 94, 92, 95, 93.67]
+    ];
+    sortedStudents = sortedStudents.sort((a, b) => b[b.length - 1] - a[a.length - 1]);
+
+    listTopStudents = (sortedStudents) => {
+        let topStudents = sortedStudents.map(student => ({
+            id: student[0],
+            firstName: student[1],
+            lastName: student[2],
+            averageMark: student[student.length - 1]
+        })); // Display the top student
+        return [topStudents];
+    }
+
+    addTopStudents = (student) => {
+        tBodyTopStudents = document.getElementById("tBodyTopStudents");
+        console.log(student.id, student.firstName, "sasasasasaaasas")
+        tBodyTopStudents.innerHTML += `<tr>
+                                        <td>${student.id}</td>
+                                        <td>${student.firstName} ${student.lastName}</td>
+                                        <td>${student.averageMark}</td>
+                                       </tr>`;
+    }
+
+    addStudents = (stArr, id) => {
+        tbodyStudents = document.getElementById("tBodyStudents");
+        text = "None";
+        color = "white";
+        if (stArr[6] >= 60) {
+            color = "green";
+            text = "Success";
+        } else {
+            color = "red";
+            text = "Fail";
+        }
+        tbodyStudents.innerHTML += `<tr>
+                                    <td>${id}</td>
+                                    <td>${stArr[1]}</td>
+                                    <td>${stArr[2]}</td>
+                                    <td>${stArr[3]}</td>
+                                    <td>${stArr[4]}</td>
+                                    <td>${stArr[5]}</td>
+                                    <td>${stArr[6]}</td>
+                                    <td style="color:${color}">${text}</td>
+                                    <td><button id='${id}' onclick="deleteStudent(${id})">Delete</button></td></tr>`;
+    }
+
+    deleteStudent = (id) => {
+        password = prompt("Password:");
+        if (password === "password") {
+            document.getElementById(id).parentElement.parentElement.remove();
+            studentsArr = studentsArr.filter(student => student[0] !== id);
+            sortedStudents = sortedStudents.filter(student => student[0] !== id);
+            updateList();
+
+        } else {
+            alert("Passwords do not match.");
+        }
+    }
+
+    createStudent = function () {
+        name = document.getElementById("name").value.replace(/<[^>]*>?/gm, '');
+        surname = document.getElementById("surname").value.replace(/<[^>]*>?/gm, '');
+
+        subject1 = parseInt(document.getElementById("subject1").value);
+        subject2 = parseInt(document.getElementById("subject2").value);
+        subject3 = parseInt(document.getElementById("subject3").value);
+
+        average = Math.floor((subject1 + subject2 + subject3) / 3);
+        let lastElement = studentsArr[studentsArr.length - 1]; // Get the ID from the last element
+        let lastElementId = lastElement[0];
+        console.log(lastElementId);
+        dataArr = [lastElementId + 1, name, surname, subject1, subject2, subject3, average];
+        studentsArr.push(dataArr);
+        sortedStudents.push(dataArr);
+
+        addStudents(dataArr, dataArr[0]);
+        updateList();
+
+        document.getElementById("name").value = "";
+        document.getElementById("surname").value = "";
+        document.getElementById("subject1").value = "";
+        document.getElementById("subject2").value = "";
+        document.getElementById("subject3").value = "";
+
+    }
+
+    updateList = () => {
+        sortedStudents = sortedStudents.sort((a, b) => b[b.length - 1] - a[a.length - 1]);
+
+        const topStudents = listTopStudents(sortedStudents)[0]
+
+        document.getElementById("tBodyTopStudents").innerHTML = "";
+        for (j = 0; j < 10; j++) {
+            addTopStudents(topStudents[j]);
+        }
+        console.log(sortedStudents);
+
+    }
+
+    document.getElementById("addForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        createStudent()
+    })
+
+    for (i = 0; i < studentsArr.length; i++) {
+        addStudents(studentsArr[i], studentsArr[i][0]);
+    }
+    updateList()
+
+    console.log(sortedStudents);
+    console.log(studentsArr)
+
+</script>
+</body>
+</html>
